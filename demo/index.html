@@ -10,7 +10,7 @@
   @media (max-width:600px){body{padding:var(--margin-mobile)}}
   .wrap{max-width:var(--max-width);margin:0 auto}
   .wrap h1{margin:0 0 var(--space-2)}
-  section{margin:var(--space-12) 0}
+  .wrap > section{margin:var(--space-12) 0}
   /* .sb-headline-* ship with margin:0 by design, so these must out-specify
      the class rather than rely on a bare element selector. */
   .wrap > section > h2{
@@ -129,7 +129,7 @@
       <button class="sb-icon-btn sb-icon-btn--primary" aria-label="Run">&#9654;</button>
       <button class="sb-icon-btn sb-icon-btn--ghost" aria-label="More">&#8943;</button>
     </div>
-    <div style="max-width:280px"><button class="sb-btn sb-btn--primary sb-btn--lg sb-btn--block">Full width</button></div>
+    <div style="width:100%;max-width:280px"><button class="sb-btn sb-btn--primary sb-btn--lg sb-btn--block">Full width</button></div>
   </div>
 </section>
 

@@ -503,7 +503,7 @@ a:hover{color:var(--text-link-hover);background:var(--blue-tint)}
   font:var(--type-body-md-weight) var(--type-body-md-size)/var(--type-body-md-line) var(--font-core);
   color:var(--text-primary);
 }
-.sb-toast__close{
+.sb-toast__close{position:relative;
   width:28px;flex:none;cursor:pointer;font:700 12px var(--font-core);
   border:none;border-left:var(--border-hair);
   background:var(--surface-inset);color:var(--text-primary);
@@ -537,7 +537,10 @@ a:hover{color:var(--text-link-hover);background:var(--blue-tint)}
 
 /* A tooltip cannot be hovered on a touch screen; do not hide anything behind
    one there. Put the information in the interface instead. */
-@media (pointer:coarse){.sb-tooltip__bubble{display:none!important}}
+@media (pointer:coarse){
+  .sb-tooltip__bubble{display:none!important}
+  .sb-toast__close::after{content:"";position:absolute;top:50%;left:50%;width:44px;height:44px;transform:translate(-50%,-50%)}
+}
 
 /* ===== components/navigation.css ===== */
 /* Navigation — NavBar, Tabs */

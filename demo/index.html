@@ -9,9 +9,11 @@
   body{padding:var(--margin-desktop)}
   @media (max-width:600px){body{padding:var(--margin-mobile)}}
   .wrap{max-width:var(--max-width);margin:0 auto}
-  h1{margin:0 0 var(--space-2)}
+  .wrap h1{margin:0 0 var(--space-2)}
   section{margin:var(--space-12) 0}
-  h2{
+  /* .sb-headline-* ship with margin:0 by design, so these must out-specify
+     the class rather than rely on a bare element selector. */
+  .wrap h2{
     margin:0 0 var(--space-4);padding-bottom:var(--space-2);
     border-bottom:var(--border-heavy);
   }

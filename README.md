@@ -68,6 +68,14 @@ Six files under `src/tokens/`:
 | `fonts.css` | Arimo via Google Fonts, plus the mono stack |
 | `base.css` | reset, `body`, link and `:focus-visible` defaults |
 
+The `.sb-headline-*`, `.sb-body-*`, `.sb-label-*` and `.sb-mono` classes all set `margin: 0`
+deliberately — a type class should set type, not inject vertical space you did not ask for.
+Spacing is the page's job.
+
+Note that a class beats a bare element selector on specificity, so `h2 { margin-bottom: 1rem }`
+loses silently to `.sb-headline-sm`. Scope your own rule to a container (`.prose h2`) or use a
+class of your own.
+
 Fonts are substituted: Arimo is loaded from Google Fonts. To self-host, drop the binaries in
 `assets/fonts/` and replace the `@import` in `tokens/fonts.css` with `@font-face` rules.
 

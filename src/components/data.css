@@ -60,10 +60,13 @@
     clip-path:inset(50%);white-space:nowrap;
   }
 
+  /* Rows carry the same horizontal inset that cells have in table mode, so the
+     rhythm does not shift when the table stacks and the zebra fill spans the
+     whole row rather than only its text. */
   .sb-table--stack tr{
     display:grid;grid-template-columns:1fr auto;
     gap:var(--space-1) var(--space-3);align-items:baseline;
-    padding:var(--space-3) 0;border-bottom:var(--border-hair);
+    padding:var(--space-3);border-bottom:var(--border-hair);
   }
   .sb-table--stack tbody tr:last-child{border-bottom:none}
 
@@ -90,7 +93,6 @@
   /* Zebra survives as an alternating block fill, inset to the row. */
   .sb-table--stack.sb-table--zebra tbody tr:nth-child(even){
     background:var(--surface-zebra);
-    padding-left:var(--space-2);padding-right:var(--space-2);
   }
   .sb-table--stack.sb-table--zebra tbody tr:nth-child(even) td{background:transparent}
   .sb-table--stack .sb-table__empty{padding:var(--space-6) 0}

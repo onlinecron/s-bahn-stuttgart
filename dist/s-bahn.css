@@ -334,7 +334,7 @@ a:hover{color:var(--text-link-hover);background:var(--blue-tint)}
 
 /* Wrapper. Establishes the container that .sb-table--stack responds to, and
    keeps a wide table scrolling inside its own box rather than the page. */
-.sb-table-wrap{container:sb-table / inline-size;overflow-x:auto}
+.sb-table-wrap{container:sb-table / inline-size;overflow-x:auto;min-width:0}
 
 .sb-table{
   width:100%;border-collapse:collapse;background:var(--surface-card);

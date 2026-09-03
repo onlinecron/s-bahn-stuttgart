@@ -1,8 +1,8 @@
 /* Feedback — Toast, Tooltip */
 
 /* Toast. The tone is carried by a solid bar, not an icon. */
-.sb-toast{
-  display:flex;align-items:stretch;min-width:280px;max-width:100%;
+.sb-toast{ /* min-width must not outgrow the space available */
+  display:flex;align-items:stretch;min-width:min(280px,100%);max-width:100%;
   border:var(--border-width-structural) solid var(--border-structural);border-radius:var(--radius);
   background:var(--surface-card);box-shadow:var(--elevation-none);
 }

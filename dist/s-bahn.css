@@ -304,7 +304,7 @@ a:hover{color:var(--text-link-hover);background:var(--blue-tint)}
   letter-spacing:var(--type-label-bold-tracking);text-transform:uppercase;
   color:var(--text-strong);margin:0;
 }
-.sb-dialog__close{
+.sb-dialog__close{position:relative;
   width:20px;height:20px;flex:none;padding:0;line-height:1;cursor:pointer;
   font:700 12px var(--font-core);
   border:var(--border-width-structural) solid var(--border-structural);
@@ -323,11 +323,15 @@ a:hover{color:var(--text-link-hover);background:var(--blue-tint)}
 /* On a phone the dialog fills the screen rather than floating in a scrim. */
 @media (max-width: 480px){
   .sb-dialog{padding:0;align-items:stretch}
-  .sb-dialog__panel,.sb-dialog__panel--wide{width:100%;max-height:none;border-width:0}
-  .sb-dialog__footer{flex-direction:column-reverse}
+  .sb-dialog__panel,.sb-dialog__panel--wide{width:100%}
+  .sb-dialog__footer{flex-direction:column}
   .sb-dialog__footer > *{width:100%}
 }
-@media (pointer:coarse){.sb-dialog__close{min-width:44px;min-height:44px}}
+/* Reach the 44px touch minimum with an invisible hit area rather than by
+   inflating a 20px control into a 44px box. */
+@media (pointer:coarse){
+  .sb-dialog__close::after{content:"";position:absolute;top:50%;left:50%;width:44px;height:44px;transform:translate(-50%,-50%)}
+}
 
 /* ===== components/data.css ===== */
 /* Data — DataTable, Badge, Tag, StatusLed */
@@ -481,8 +485,8 @@ a:hover{color:var(--text-link-hover);background:var(--blue-tint)}
 /* Feedback — Toast, Tooltip */
 
 /* Toast. The tone is carried by a solid bar, not an icon. */
-.sb-toast{
-  display:flex;align-items:stretch;min-width:280px;max-width:100%;
+.sb-toast{ /* min-width must not outgrow the space available */
+  display:flex;align-items:stretch;min-width:min(280px,100%);max-width:100%;
   border:var(--border-width-structural) solid var(--border-structural);border-radius:var(--radius);
   background:var(--surface-card);box-shadow:var(--elevation-none);
 }

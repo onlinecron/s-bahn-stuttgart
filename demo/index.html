@@ -13,7 +13,7 @@
   section{margin:var(--space-12) 0}
   /* .sb-headline-* ship with margin:0 by design, so these must out-specify
      the class rather than rely on a bare element selector. */
-  .wrap h2{
+  .wrap > section > h2{
     margin:0 0 var(--space-4);padding-bottom:var(--space-2);
     border-bottom:var(--border-heavy);
   }
@@ -129,7 +129,7 @@
       <button class="sb-icon-btn sb-icon-btn--primary" aria-label="Run">&#9654;</button>
       <button class="sb-icon-btn sb-icon-btn--ghost" aria-label="More">&#8943;</button>
     </div>
-    <div style="width:280px"><button class="sb-btn sb-btn--primary sb-btn--lg sb-btn--block">Full width</button></div>
+    <div style="max-width:280px"><button class="sb-btn sb-btn--primary sb-btn--lg sb-btn--block">Full width</button></div>
   </div>
 </section>
 

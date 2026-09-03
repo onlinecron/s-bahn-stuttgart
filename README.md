@@ -118,6 +118,10 @@ would have left it overlapping itself.
 Touch-target minimums are keyed on `@media (pointer: coarse)` rather than viewport width: a tablet
 in landscape needs the larger target, a narrow desktop window does not.
 
+Verified down to **320px** — the narrowest width worth designing for, and the practical floor for
+phones. It is also checked at **260px**, where it still holds together without horizontal scroll;
+below that nothing is promised.
+
 ### `.sb-table--stack`
 
 A table cannot be squeezed below roughly 560px and stay readable, so `.sb-table--stack` turns each

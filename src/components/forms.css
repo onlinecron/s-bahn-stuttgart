@@ -1,0 +1,103 @@
+/* Forms — field wrapper, Input, Select, Checkbox, Radio, Switch */
+
+/* Wrapper: label above control, message below. */
+.sb-field{display:flex;flex-direction:column;gap:var(--space-1)}
+.sb-field__label{
+  font:var(--type-label-bold-weight) var(--type-label-bold-size)/var(--type-label-bold-line) var(--font-core);
+  letter-spacing:var(--type-label-bold-tracking);text-transform:uppercase;color:var(--text-strong);
+}
+.sb-field__msg{
+  font:var(--type-label-sm-weight) var(--type-label-sm-size)/var(--type-label-sm-line) var(--font-core);
+  color:var(--text-muted);
+}
+.sb-field__msg--error{color:var(--red-alarm)}
+
+/* Input. The border lives on a wrapper so prefix/suffix affixes can sit inside it. */
+.sb-input{
+  display:flex;align-items:stretch;
+  border:var(--border-width-structural) solid var(--border-structural);border-radius:var(--radius);
+  background:var(--surface-card);
+}
+/* Focus and error thicken to 2px via outline, not border, so the control
+   never changes size and nothing around it reflows. */
+.sb-input:focus-within{outline:var(--focus-outline);outline-offset:-2px}
+.sb-input--error{border-color:var(--red-alarm);outline:var(--border-width-heavy) solid var(--red-alarm);outline-offset:-2px}
+.sb-input__control{
+  flex:1;min-width:0;border:none;outline:none;background:transparent;
+  padding:var(--pad-control-y) var(--pad-control-x);color:var(--text-primary);
+  font:var(--type-body-md-weight) var(--type-body-md-size)/var(--type-body-md-line) var(--font-core);
+}
+.sb-input__control--mono{
+  font:var(--type-mono-data-weight) var(--type-mono-data-size)/var(--type-mono-data-line) var(--font-mono);
+  font-variant-numeric:tabular-nums;
+}
+.sb-input__affix{
+  display:flex;align-items:center;padding:0 var(--space-2);flex:none;
+  background:var(--surface-header);color:var(--text-muted);
+  font:var(--type-label-sm-weight) var(--type-label-sm-size)/var(--type-label-sm-line) var(--font-core);
+}
+.sb-input__affix:first-child{border-right:var(--border-solid)}
+.sb-input__affix:last-child{border-left:var(--border-solid)}
+.sb-input:has(.sb-input__control:disabled){background:var(--disabled-surface);border-color:var(--disabled-border)}
+.sb-input__control:disabled{color:var(--disabled-text);cursor:not-allowed}
+
+/* Select. Native chevron replaced with two gradients — no SVG asset needed. */
+.sb-select{
+  appearance:none;
+  border:var(--border-width-structural) solid var(--border-structural);border-radius:var(--radius);
+  background-color:var(--surface-card);color:var(--text-primary);
+  padding:var(--pad-control-y) var(--space-8) var(--pad-control-y) var(--pad-control-x);
+  font:var(--type-body-md-weight) var(--type-body-md-size)/var(--type-body-md-line) var(--font-core);
+  background-image:linear-gradient(45deg,transparent 50%,var(--charcoal) 50%),linear-gradient(135deg,var(--charcoal) 50%,transparent 50%);
+  background-position:calc(100% - 16px) 50%,calc(100% - 11px) 50%;
+  background-size:5px 5px,5px 5px;background-repeat:no-repeat;
+}
+.sb-select--error{border-color:var(--red-alarm);outline:var(--border-width-heavy) solid var(--red-alarm);outline-offset:-2px}
+.sb-select:disabled{background-color:var(--disabled-surface);color:var(--disabled-text);border-color:var(--disabled-border);cursor:not-allowed}
+
+/* Checkbox and Radio share a 16px box. The native control is kept, made
+   transparent, and stretched over the box so it stays keyboard-operable. */
+.sb-check{
+  display:inline-flex;align-items:center;gap:var(--space-2);
+  color:var(--text-primary);cursor:pointer;
+}
+.sb-check__box{
+  position:relative;width:16px;height:16px;flex:none;display:inline-block;
+  border:var(--border-width-structural) solid var(--border-structural);
+  background:var(--surface-card);
+}
+.sb-check__box input{position:absolute;inset:0;opacity:0;margin:0;cursor:inherit}
+.sb-check__box::after{content:"";position:absolute;inset:3px;background:transparent}
+.sb-check__box:has(input:checked)::after{background:var(--blue-action)}
+.sb-check__box:has(input:indeterminate)::after{inset:7px 3px;background:var(--blue-action)}
+.sb-check__box:has(input:focus-visible){outline:var(--focus-outline)}
+.sb-check__label{font:var(--type-body-md-weight) var(--type-body-md-size)/var(--type-body-md-line) var(--font-core)}
+
+/* The one exception to --radius: 0 in the whole system. */
+.sb-check--radio .sb-check__box::after{inset:4px;border-radius:50%}
+
+.sb-check:has(input:disabled){color:var(--disabled-text);cursor:not-allowed}
+.sb-check:has(input:disabled) .sb-check__box{background:var(--disabled-surface);border-color:var(--disabled-border)}
+
+/* Switch. Snaps — no transition on position, per the interaction rules. */
+.sb-switch{display:inline-flex;align-items:center;gap:var(--space-3);cursor:pointer}
+.sb-switch__track{
+  position:relative;width:40px;height:20px;flex:none;padding:2px;
+  display:inline-flex;align-items:center;justify-content:flex-start;
+  border:var(--border-width-structural) solid var(--border-structural);
+  background:var(--surface-card);
+}
+.sb-switch__track input{position:absolute;inset:0;opacity:0;margin:0;cursor:inherit}
+.sb-switch__thumb{width:14px;height:14px;background:var(--charcoal);margin-left:0}
+.sb-switch__track:has(input:checked){background:var(--blue-action)}
+.sb-switch__track:has(input:checked) .sb-switch__thumb{background:#fff;margin-left:auto}
+.sb-switch__track:has(input:focus-visible){outline:var(--focus-outline)}
+.sb-switch:has(input:disabled){cursor:not-allowed}
+.sb-switch:has(input:disabled) .sb-switch__track{background:var(--disabled-surface);border-color:var(--disabled-border)}
+.sb-switch:has(input:disabled) .sb-switch__label{color:var(--disabled-text)}
+.sb-switch__label{font:var(--type-body-md-weight) var(--type-body-md-size)/var(--type-body-md-line) var(--font-core)}
+
+@media (pointer:coarse){
+  .sb-input__control,.sb-select{min-height:44px}
+  .sb-check,.sb-switch{min-height:44px}
+}

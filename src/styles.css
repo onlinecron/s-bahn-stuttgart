@@ -1,0 +1,15 @@
+/* s-bahn-stuttgart — source entry point.
+   Consumers should link dist/s-bahn.css instead; this file is for development,
+   where the browser resolves each @import separately. */
+@import url("tokens/fonts.css");
+@import url("tokens/colors.css");
+@import url("tokens/typography.css");
+@import url("tokens/spacing.css");
+@import url("tokens/borders.css");
+@import url("tokens/base.css");
+@import url("components/actions.css");
+@import url("components/forms.css");
+@import url("components/containers.css");
+@import url("components/data.css");
+@import url("components/feedback.css");
+@import url("components/navigation.css");

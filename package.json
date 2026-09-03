@@ -1,0 +1,24 @@
+{
+  "name": "s-bahn-stuttgart",
+  "version": "0.1.0",
+  "description": "A small, flat, utilitarian design system in plain CSS.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/onlinecron/s-bahn-stuttgart.git"
+  },
+  "homepage": "https://github.com/onlinecron/s-bahn-stuttgart#readme",
+  "main": "dist/s-bahn.css",
+  "style": "dist/s-bahn.css",
+  "exports": {
+    ".": "./dist/s-bahn.css",
+    "./dist/s-bahn.css": "./dist/s-bahn.css",
+    "./src/*": "./src/*"
+  },
+  "files": ["dist", "src", "react", "README.md", "LICENSE"],
+  "sideEffects": ["*.css"],
+  "scripts": {
+    "build": "./build.sh"
+  },
+  "keywords": ["css", "design-system", "design-tokens", "flat", "utilitarian"]
+}

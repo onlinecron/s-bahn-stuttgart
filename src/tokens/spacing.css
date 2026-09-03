@@ -1,0 +1,8 @@
+:root{
+--space-unit:4px;--space-1:4px;--space-2:8px;--space-3:12px;--space-4:16px;--space-5:20px;--space-6:24px;--space-8:32px;--space-10:40px;--space-12:48px;--space-16:64px;
+--gutter:16px;--margin-mobile:16px;--margin-desktop:24px;--max-width:1280px;
+--control-height-sm:24px;--control-height-md:32px;--control-height-lg:40px;
+--pad-control-y:8px;--pad-control-x:12px;--pad-section:16px;
+--grid-columns-desktop:12;/* @kind other */
+--grid-columns-mobile:4;/* @kind other */
+}

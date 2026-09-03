@@ -1,0 +1,18 @@
+/* Base palette — S-Bahn Stuttgart signal colours */
+:root{
+--blue-signal:#0091d4;--blue-action:#006190;--blue-action-pressed:#004b71;--blue-tint:#cbe6ff;--blue-light:#8ecdff;
+--yellow-signal:#ffcc00;--yellow-deep:#f1c100;--yellow-shadow:#745b00;--yellow-tint:#ffe08b;
+--charcoal:#333333;--charcoal-strong:#1b1c1c;--charcoal-mid:#3f4850;
+--grey-050:#ffffff;--grey-100:#f6f3f2;--grey-200:#f0eded;--grey-300:#e6e6e6;--grey-400:#dcd9d9;--grey-500:#bec7d2;--grey-600:#6f7881;--grey-700:#5b5c5c;
+--green-ok:#008000;--red-alarm:#c00000;--red-alarm-deep:#93000a;--red-tint:#ffdad6;
+/* Semantic aliases */
+--surface-page:var(--grey-300);--surface-card:var(--grey-050);--surface-header:var(--grey-300);--surface-inset:var(--grey-100);--surface-zebra:var(--grey-200);--surface-inverse:var(--charcoal-strong);
+--text-primary:var(--charcoal);--text-strong:var(--charcoal-strong);--text-muted:var(--charcoal-mid);--text-faint:var(--grey-600);--text-inverse:#ffffff;--text-link:var(--blue-action);--text-link-hover:var(--blue-action-pressed);
+--action-primary:var(--blue-action);--action-primary-hover:#00557f;--action-primary-pressed:var(--blue-action-pressed);--on-action-primary:#ffffff;
+--action-secondary:var(--grey-050);--action-secondary-hover:var(--blue-tint);--on-action-secondary:var(--blue-action);
+--accent-attention:var(--yellow-signal);--on-accent-attention:var(--charcoal-strong);
+--focus-ring:var(--blue-signal);
+--status-running:var(--blue-signal);--status-pending:var(--yellow-signal);--status-inactive:var(--charcoal);--status-ok:var(--green-ok);--status-error:var(--red-alarm);
+--border-structural:var(--charcoal);--border-hairline:var(--grey-500);--border-inverse:#000000;
+--disabled-surface:var(--grey-300);--disabled-text:var(--grey-600);--disabled-border:var(--grey-600);
+}

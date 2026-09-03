@@ -1,0 +1,144 @@
+/* Data — DataTable, Badge, Tag, StatusLed */
+
+/* Wrapper. Establishes the container that .sb-table--stack responds to, and
+   keeps a wide table scrolling inside its own box rather than the page. */
+.sb-table-wrap{container:sb-table / inline-size;overflow-x:auto}
+
+.sb-table{
+  width:100%;border-collapse:collapse;background:var(--surface-card);
+  font:var(--type-body-md-weight) var(--type-body-md-size)/var(--type-body-md-line) var(--font-core);
+}
+.sb-table th{
+  text-align:left;padding:var(--space-2) var(--space-3);
+  background:var(--surface-header);color:var(--text-strong);white-space:nowrap;
+  border-bottom:var(--border-solid);border-right:var(--border-hair);
+  font:var(--type-label-bold-weight) var(--type-label-bold-size)/var(--type-label-bold-line) var(--font-core);
+  letter-spacing:var(--type-label-bold-tracking);text-transform:uppercase;
+}
+.sb-table td{
+  padding:var(--space-2) var(--space-3);white-space:nowrap;vertical-align:top;
+  border-bottom:var(--border-hair);border-right:var(--border-hair);
+}
+.sb-table th:last-child,.sb-table td:last-child{border-right:none}
+.sb-table--zebra tbody tr:nth-child(even) td{background:var(--surface-zebra)}
+.sb-table--dense th,.sb-table--dense td{padding:var(--space-1) var(--space-2)}
+.sb-table--rows-clickable tbody tr{cursor:pointer}
+.sb-table__empty{padding:var(--space-6);text-align:center;color:var(--text-faint);white-space:normal}
+
+/* Cell content modifiers */
+.sb-cell--mono{
+  font:var(--type-mono-data-weight) var(--type-mono-data-size)/var(--type-mono-data-line) var(--font-mono);
+  font-variant-numeric:tabular-nums;
+}
+.sb-cell--wrap{white-space:normal}
+.sb-cell--num{text-align:right;font-variant-numeric:tabular-nums}
+
+/* ---------------------------------------------------------------------------
+   .sb-table--stack — the responsive table→card transform.
+
+   A table cannot be squeezed below roughly 560px and stay readable, so below
+   that each row becomes a stacked block. Requires an ancestor container:
+   .sb-table-wrap, or any .sb-card (both declare container-type). Without one
+   the query never matches and the table simply scrolls instead.
+
+   Each <tr> becomes a two-column grid. Cells span the full width by default —
+   one stacked line each, labelled from data-label. Opt a pair of cells onto a
+   shared line with --start / --end, which is how the job list reads:
+
+     name            [BADGE]   <- --start / --end
+     POST api.example/hook     <- default, full width
+     0 3 * * *   Edit Delete   <- --start / --end
+--------------------------------------------------------------------------- */
+@container (max-width: 560px){
+  .sb-table--stack,
+  .sb-table--stack tbody,
+  .sb-table--stack tr,
+  .sb-table--stack td{display:block}
+
+  .sb-table--stack thead{
+    position:absolute;width:1px;height:1px;overflow:hidden;
+    clip-path:inset(50%);white-space:nowrap;
+  }
+
+  .sb-table--stack tr{
+    display:grid;grid-template-columns:1fr auto;
+    gap:var(--space-1) var(--space-3);align-items:baseline;
+    padding:var(--space-3) 0;border-bottom:var(--border-hair);
+  }
+  .sb-table--stack tbody tr:last-child{border-bottom:none}
+
+  .sb-table--stack td{
+    grid-column:1 / -1;
+    padding:0;border:none;white-space:normal;
+    overflow-wrap:anywhere;
+  }
+  .sb-table--stack td:empty{display:none}
+
+  /* Paired cells share one line. */
+  .sb-table--stack .sb-cell--start{grid-column:1;min-width:0}
+  .sb-table--stack .sb-cell--end{grid-column:2;text-align:right;white-space:nowrap}
+
+  /* Labels come from data-label, so the stacked view stays self-describing. */
+  .sb-table--stack td[data-label]::before{
+    content:attr(data-label);display:block;
+    font:var(--type-label-sm-weight) var(--type-label-sm-size)/var(--type-label-sm-line) var(--font-core);
+    text-transform:uppercase;letter-spacing:var(--type-label-bold-tracking);
+    color:var(--text-faint);
+  }
+  .sb-table--stack .sb-cell--end[data-label]::before{text-align:right}
+
+  /* Zebra survives as an alternating block fill, inset to the row. */
+  .sb-table--stack.sb-table--zebra tbody tr:nth-child(even){
+    background:var(--surface-zebra);
+    padding-left:var(--space-2);padding-right:var(--space-2);
+  }
+  .sb-table--stack.sb-table--zebra tbody tr:nth-child(even) td{background:transparent}
+  .sb-table--stack .sb-table__empty{padding:var(--space-6) 0}
+}
+
+/* Badge — filled, bordered, uppercase. States and counts. */
+.sb-badge{
+  display:inline-flex;align-items:center;flex:none;white-space:nowrap;
+  padding:2px var(--space-2);
+  border:var(--border-width-structural) solid var(--border-structural);border-radius:var(--radius);
+  background:var(--surface-header);color:var(--text-strong);
+  font:var(--type-label-bold-weight) var(--type-label-bold-size)/var(--type-label-bold-line) var(--font-core);
+  letter-spacing:var(--type-label-bold-tracking);text-transform:uppercase;
+}
+.sb-badge--info{background:var(--blue-action);color:#fff}
+.sb-badge--attention{background:var(--yellow-signal);color:var(--charcoal-strong)}
+.sb-badge--ok{background:var(--green-ok);color:#fff}
+.sb-badge--error{background:var(--red-alarm);color:#fff}
+
+/* Tag — hairline border, inset fill, sentence case. Removable. */
+.sb-tag{
+  display:inline-flex;align-items:center;gap:var(--space-2);flex:none;white-space:nowrap;
+  padding:2px var(--space-2);
+  border:var(--border-hair);border-radius:var(--radius);
+  background:var(--surface-inset);color:var(--text-primary);
+  font:var(--type-label-sm-weight) var(--type-label-sm-size)/var(--type-label-sm-line) var(--font-core);
+}
+.sb-tag--selectable{cursor:pointer}
+.sb-tag--selectable:hover{background:var(--blue-tint)}
+.sb-tag[aria-pressed=true]{background:var(--blue-action);color:#fff;border-color:var(--border-structural)}
+.sb-tag__remove{
+  border:none;background:transparent;padding:0;line-height:1;cursor:pointer;
+  color:var(--text-muted);font:700 12px var(--font-core);
+}
+
+/* StatusLed — a square. Meaning by shape and colour, never a pictogram. */
+.sb-led{display:inline-flex;align-items:center;gap:var(--space-2)}
+.sb-led__dot{
+  width:10px;height:10px;flex:none;
+  border:var(--border-width-structural) solid var(--border-structural);
+  background:var(--status-inactive);
+}
+.sb-led--running .sb-led__dot{background:var(--status-running)}
+.sb-led--pending .sb-led__dot{background:var(--status-pending)}
+.sb-led--inactive .sb-led__dot{background:var(--status-inactive)}
+.sb-led--ok .sb-led__dot{background:var(--status-ok)}
+.sb-led--error .sb-led__dot{background:var(--status-error)}
+.sb-led__label{
+  font:var(--type-label-bold-weight) var(--type-label-bold-size)/var(--type-label-bold-line) var(--font-core);
+  letter-spacing:var(--type-label-bold-tracking);text-transform:uppercase;color:var(--text-primary);
+}

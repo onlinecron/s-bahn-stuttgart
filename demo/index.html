@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>s-bahn-stuttgart — specimen</title>
+<link rel="stylesheet" href="../dist/s-bahn.css">
+<style>
+  body{padding:var(--margin-desktop)}
+  @media (max-width:600px){body{padding:var(--margin-mobile)}}
+  .wrap{max-width:var(--max-width);margin:0 auto}
+  h1{margin:0 0 var(--space-2)}
+  section{margin:var(--space-12) 0}
+  h2{
+    margin:0 0 var(--space-4);padding-bottom:var(--space-2);
+    border-bottom:var(--border-heavy);
+  }
+  .note{color:var(--text-muted);max-width:70ch;margin:0 0 var(--space-4)}
+  .row{display:flex;flex-wrap:wrap;gap:var(--space-3);align-items:center}
+  .stack{display:flex;flex-direction:column;gap:var(--space-3);align-items:flex-start}
+  .grid{display:grid;gap:var(--space-4)}
+  /* Two specimens of the same component: full width, and clamped to a phone.
+     Because components use container queries, the 375px column shows the
+     narrow layout even on a wide screen — which is the modal case. */
+  .pair{display:grid;grid-template-columns:minmax(0,1fr) min(375px,100%);gap:var(--space-6);align-items:start}
+  @media@media (max-width:900px){.pair{grid-template-columns:min(375px,100%)}}
+  .pair__label{
+    font:var(--type-label-sm-weight) var(--type-label-sm-size)/var(--type-label-sm-line) var(--font-core);
+    text-transform:uppercase;letter-spacing:.04em;color:var(--text-faint);
+    margin:0 0 var(--space-2);
+  }
+  .swatches{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:var(--space-2)}
+  .sw{border:var(--border-solid);background:var(--surface-card)}
+  .sw__chip{height:48px;border-bottom:var(--border-solid)}
+  .sw__meta{padding:var(--space-2)}
+  .sw__name{font:700 12px/16px var(--font-core)}
+  .sw__val{font:400 12px/16px var(--font-mono);color:var(--text-muted)}
+  .ruler{display:flex;align-items:flex-end;gap:var(--space-2);flex-wrap:wrap}
+  .ruler > div{width:24px}
+  .ruler > div > div{background:var(--blue-signal)}
+  .ruler span{font:400 11px/1 var(--font-mono);color:var(--text-muted);display:block;margin-top:4px;text-align:center}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1 class="sb-headline-lg">s-bahn-stuttgart</h1>
+  <p class="sb-body-lg" style="color:var(--text-muted);max-width:70ch">
+    Specimen page. Flat fills, 1px charcoal structure, zero radius, no elevation.
+    Components that can be embedded are specimened twice — full width, and clamped
+    to 375px — so the container-query behaviour is visible side by side.
+  </p>
+</header>
+
+<section>
+  <h2 class="sb-headline-sm">Colour — signal</h2>
+  <p class="note sb-body-md">Two blues with distinct jobs. <code class="sb-mono">--blue-action</code>
+     is the only one that clears 4.5:1 on white, so it carries all text and interaction.</p>
+  <div class="swatches">
+    <div class="sw"><div class="sw__chip" style="background:var(--blue-action)"></div><div class="sw__meta"><div class="sw__name">Action blue</div><div class="sw__val">--blue-action · #006190</div></div></div>
+    <div class="sw"><div class="sw__chip" style="background:var(--blue-signal)"></div><div class="sw__meta"><div class="sw__name">Signal blue</div><div class="sw__val">--blue-signal · #0091d4</div></div></div>
+    <div class="sw"><div class="sw__chip" style="background:var(--blue-tint)"></div><div class="sw__meta"><div class="sw__name">Blue tint</div><div class="sw__val">--blue-tint · #cbe6ff</div></div></div>
+    <div class="sw"><div class="sw__chip" style="background:var(--yellow-signal)"></div><div class="sw__meta"><div class="sw__name">Signal yellow</div><div class="sw__val">--yellow-signal · #ffcc00</div></div></div>
+  </div>
+</section>
+
+<section>
+  <h2 class="sb-headline-sm">Colour — neutral and status</h2>
+  <div class="swatches">
+    <div class="sw"><div class="sw__chip" style="background:var(--surface-page)"></div><div class="sw__meta"><div class="sw__name">Page ground</div><div class="sw__val">--surface-page</div></div></div>
+    <div class="sw"><div class="sw__chip" style="background:var(--surface-card)"></div><div class="sw__meta"><div class="sw__name">Card</div><div class="sw__val">--surface-card</div></div></div>
+    <div class="sw"><div class="sw__chip" style="background:var(--surface-inset)"></div><div class="sw__meta"><div class="sw__name">Inset</div><div class="sw__val">--surface-inset</div></div></div>
+    <div class="sw"><div class="sw__chip" style="background:var(--charcoal)"></div><div class="sw__meta"><div class="sw__name">Text</div><div class="sw__val">--text-primary</div></div></div>
+    <div class="sw"><div class="sw__chip" style="background:var(--green-ok)"></div><div class="sw__meta"><div class="sw__name">OK</div><div class="sw__val">--status-ok</div></div></div>
+    <div class="sw"><div class="sw__chip" style="background:var(--red-alarm)"></div><div class="sw__meta"><div class="sw__name">Error</div><div class="sw__val">--status-error</div></div></div>
+  </div>
+</section>
+
+<section>
+  <h2 class="sb-headline-sm">Type</h2>
+  <p class="note sb-body-md">Hierarchy is carried by weight and colour, not size. Body is fixed at 14px.</p>
+  <div class="stack">
+    <p class="sb-headline-lg">Headline large · 30/36 bold</p>
+    <p class="sb-headline-md">Headline medium · 24/30 bold</p>
+    <p class="sb-headline-sm">Headline small · 18/24 bold</p>
+    <p class="sb-body-lg">Body large · 16/24. Used for a lead paragraph.</p>
+    <p class="sb-body-md">Body medium · 14/20. The default for everything else.</p>
+    <p class="sb-label-bold">Label bold · 12/16 uppercase, 0.04em</p>
+    <p class="sb-label-sm">Label small · 12/16 regular</p>
+    <p class="sb-mono">Mono data · 13/18 · 12:07 · +4 MIN · 94,1 % · */15 * * * *</p>
+  </div>
+</section>
+
+<section>
+  <h2 class="sb-headline-sm">Spacing</h2>
+  <p class="note sb-body-md">Everything is a multiple of 4px.</p>
+  <div class="ruler">
+    <div><div style="height:4px"></div><span>1</span></div>
+    <div><div style="height:8px"></div><span>2</span></div>
+    <div><div style="height:12px"></div><span>3</span></div>
+    <div><div style="height:16px"></div><span>4</span></div>
+    <div><div style="height:24px"></div><span>6</span></div>
+    <div><div style="height:32px"></div><span>8</span></div>
+    <div><div style="height:48px"></div><span>12</span></div>
+    <div><div style="height:64px"></div><span>16</span></div>
+  </div>
+</section>
+
+<section>
+  <h2 class="sb-headline-sm">Buttons</h2>
+  <div class="stack">
+    <div class="row">
+      <button class="sb-btn sb-btn--primary">Primary</button>
+      <button class="sb-btn sb-btn--secondary">Secondary</button>
+      <button class="sb-btn sb-btn--attention">Attention</button>
+      <button class="sb-btn sb-btn--danger">Danger</button>
+      <button class="sb-btn sb-btn--ghost">Ghost</button>
+      <button class="sb-btn sb-btn--primary" disabled>Disabled</button>
+    </div>
+    <div class="row">
+      <button class="sb-btn sb-btn--primary sb-btn--sm">Small</button>
+      <button class="sb-btn sb-btn--primary">Medium</button>
+      <button class="sb-btn sb-btn--primary sb-btn--lg">Large</button>
+      <button class="sb-icon-btn" aria-label="Refresh">&#8635;</button>
+      <button class="sb-icon-btn sb-icon-btn--primary" aria-label="Run">&#9654;</button>
+      <button class="sb-icon-btn sb-icon-btn--ghost" aria-label="More">&#8943;</button>
+    </div>
+    <div style="width:280px"><button class="sb-btn sb-btn--primary sb-btn--lg sb-btn--block">Full width</button></div>
+  </div>
+</section>
+
+<section>
+  <h2 class="sb-headline-sm">Forms</h2>
+  <div class="pair">
+    <div>
+      <p class="pair__label">Auto width</p>
+      <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr))">
+        <div class="sb-field">
+          <label class="sb-field__label" for="d1">Job name</label>
+          <div class="sb-input"><input class="sb-input__control" id="d1" value="invoice-sweep"></div>
+        </div>
+        <div class="sb-field">
+          <label class="sb-field__label" for="d2">Endpoint</label>
+          <div class="sb-input">
+            <span class="sb-input__affix">POST</span>
+            <input class="sb-input__control sb-input__control--mono" id="d2" value="/cron/invoices">
+          </div>
+        </div>
+        <div class="sb-field">
+          <label class="sb-field__label" for="d3">Schedule</label>
+          <div class="sb-input sb-input--error"><input class="sb-input__control sb-input__control--mono" id="d3" value="0 3 * *"></div>
+          <span class="sb-field__msg sb-field__msg--error">Five fields required, four given.</span>
+        </div>
+        <div class="sb-field">
+          <label class="sb-field__label" for="d4">Timezone</label>
+          <select class="sb-select" id="d4"><option>Europe/Berlin</option><option>UTC</option></select>
+          <span class="sb-field__msg">One timezone per job.</span>
+        </div>
+      </div>
+      <div class="row" style="margin-top:var(--space-4)">
+        <label class="sb-check"><span class="sb-check__box"><input type="checkbox" checked></span><span class="sb-check__label">Retry on failure</span></label>
+        <label class="sb-check"><span class="sb-check__box"><input type="checkbox"></span><span class="sb-check__label">Webhook alert</span></label>
+        <label class="sb-check sb-check--radio"><span class="sb-check__box"><input type="radio" name="dr" checked></span><span class="sb-check__label">Every hour</span></label>
+        <label class="sb-check sb-check--radio"><span class="sb-check__box"><input type="radio" name="dr"></span><span class="sb-check__label">Every 3 hours</span></label>
+        <label class="sb-switch"><span class="sb-switch__track"><input type="checkbox" checked><span class="sb-switch__thumb"></span></span><span class="sb-switch__label">Enabled</span></label>
+      </div>
+    </div>
+    <div>
+      <p class="pair__label">375px</p>
+      <div class="grid">
+        <div class="sb-field">
+          <label class="sb-field__label" for="m1">Job name</label>
+          <div class="sb-input"><input class="sb-input__control" id="m1" value="invoice-sweep"></div>
+        </div>
+        <div class="sb-field">
+          <label class="sb-field__label" for="m2">Schedule</label>
+          <div class="sb-input"><input class="sb-input__control sb-input__control--mono" id="m2" value="0 3 * * *"></div>
+        </div>
+        <label class="sb-switch"><span class="sb-switch__track"><input type="checkbox" checked><span class="sb-switch__thumb"></span></span><span class="sb-switch__label">Enabled</span></label>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2 class="sb-headline-sm">Badges, tags, status</h2>
+  <div class="stack">
+    <div class="row">
+      <span class="sb-badge">Neutral</span>
+      <span class="sb-badge sb-badge--info">Info</span>
+      <span class="sb-badge sb-badge--attention">Pending</span>
+      <span class="sb-badge sb-badge--ok">OK</span>
+      <span class="sb-badge sb-badge--error">Failing</span>
+    </div>
+    <div class="row">
+      <span class="sb-tag">Every minute</span>
+      <button class="sb-tag sb-tag--selectable" aria-pressed="true">Hourly</button>
+      <button class="sb-tag sb-tag--selectable" aria-pressed="false">Nightly 03:00</button>
+      <span class="sb-tag">Weekdays 09:00 <button class="sb-tag__remove" aria-label="Remove">&times;</button></span>
+    </div>
+    <div class="row">
+      <span class="sb-led sb-led--running"><span class="sb-led__dot"></span><span class="sb-led__label">Running</span></span>
+      <span class="sb-led sb-led--pending"><span class="sb-led__dot"></span><span class="sb-led__label">Pending</span></span>
+      <span class="sb-led sb-led--ok"><span class="sb-led__dot"></span><span class="sb-led__label">OK</span></span>
+      <span class="sb-led sb-led--error"><span class="sb-led__dot"></span><span class="sb-led__label">Error</span></span>
+      <span class="sb-led sb-led--inactive"><span class="sb-led__dot"></span><span class="sb-led__label">Inactive</span></span>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2 class="sb-headline-sm">Card</h2>
+  <p class="note sb-body-md">The narrow specimen shows the header stacking below 380px of
+     <em>card</em> width — not viewport width.</p>
+  <div class="pair">
+    <div>
+      <p class="pair__label">Auto width</p>
+      <section class="sb-card">
+        <header class="sb-card__header">
+          <div class="sb-card__heading">
+            <h3 class="sb-card__title">Job detail</h3>
+            <span class="sb-card__meta">invoice-sweep · 0 3 * * *</span>
+          </div>
+          <div class="sb-card__actions">
+            <button class="sb-btn sb-btn--secondary sb-btn--sm">Edit</button>
+            <button class="sb-btn sb-btn--primary sb-btn--sm">Run now</button>
+          </div>
+        </header>
+        <div class="sb-card__body sb-body-md">
+          Every run is kept with status, duration and response.
+        </div>
+      </section>
+    </div>
+    <div>
+      <p class="pair__label">375px</p>
+      <section class="sb-card">
+        <header class="sb-card__header">
+          <div class="sb-card__heading">
+            <h3 class="sb-card__title">Job detail</h3>
+            <span class="sb-card__meta">0 3 * * *</span>
+          </div>
+          <div class="sb-card__actions">
+            <button class="sb-btn sb-btn--secondary sb-btn--sm">Edit</button>
+            <button class="sb-btn sb-btn--primary sb-btn--sm">Run now</button>
+          </div>
+        </header>
+        <div class="sb-card__body sb-body-md">
+          Every run is kept with status, duration and response.
+        </div>
+      </section>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2 class="sb-headline-sm">Data table</h2>
+  <p class="note sb-body-md">Identical markup in both columns. Below 560px of container width each
+     row becomes a stacked block: <code class="sb-mono">--start</code>/<code class="sb-mono">--end</code>
+     cells pair onto one line, the rest take a line each labelled from
+     <code class="sb-mono">data-label</code>.</p>
+  <div class="pair">
+    <div>
+      <p class="pair__label">Auto width</p>
+      <div class="sb-table-wrap">
+        <table class="sb-table sb-table--stack sb-table--zebra">
+          <thead><tr><th>Job</th><th>Status</th><th>Endpoint</th><th>Schedule</th><th>Actions</th></tr></thead>
+          <tbody>
+            <tr>
+              <td class="sb-cell--start"><a href="#">invoice-sweep</a></td>
+              <td class="sb-cell--end"><span class="sb-badge sb-badge--ok">OK</span></td>
+              <td class="sb-cell--mono" data-label="Endpoint">POST api.acme.dev/cron/invoices</td>
+              <td class="sb-cell--start sb-cell--mono">0 3 * * *</td>
+              <td class="sb-cell--end"><a href="#">Edit</a></td>
+            </tr>
+            <tr>
+              <td class="sb-cell--start"><a href="#">sitemap-rebuild</a></td>
+              <td class="sb-cell--end"><span class="sb-badge sb-badge--ok">OK</span></td>
+              <td class="sb-cell--mono" data-label="Endpoint">GET acme.dev/internal/sitemap</td>
+              <td class="sb-cell--start sb-cell--mono">0 */6 * * *</td>
+              <td class="sb-cell--end"><a href="#">Edit</a></td>
+            </tr>
+            <tr>
+              <td class="sb-cell--start"><a href="#">stripe-dunning-sweep</a></td>
+              <td class="sb-cell--end"><span class="sb-badge sb-badge--error">Failing</span></td>
+              <td class="sb-cell--mono" data-label="Endpoint">POST api.acme.dev/billing/dunning</td>
+              <td class="sb-cell--start sb-cell--mono">*/15 * * * *</td>
+              <td class="sb-cell--end"><a href="#">Edit</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div>
+      <p class="pair__label">375px — stacked</p>
+      <div class="sb-table-wrap">
+        <table class="sb-table sb-table--stack sb-table--zebra">
+          <thead><tr><th>Job</th><th>Status</th><th>Endpoint</th><th>Schedule</th><th>Actions</th></tr></thead>
+          <tbody>
+            <tr>
+              <td class="sb-cell--start"><a href="#">invoice-sweep</a></td>
+              <td class="sb-cell--end"><span class="sb-badge sb-badge--ok">OK</span></td>
+              <td class="sb-cell--mono" data-label="Endpoint">POST api.acme.dev/cron/invoices</td>
+              <td class="sb-cell--start sb-cell--mono">0 3 * * *</td>
+              <td class="sb-cell--end"><a href="#">Edit</a></td>
+            </tr>
+            <tr>
+              <td class="sb-cell--start"><a href="#">sitemap-rebuild</a></td>
+              <td class="sb-cell--end"><span class="sb-badge sb-badge--ok">OK</span></td>
+              <td class="sb-cell--mono" data-label="Endpoint">GET acme.dev/internal/sitemap</td>
+              <td class="sb-cell--start sb-cell--mono">0 */6 * * *</td>
+              <td class="sb-cell--end"><a href="#">Edit</a></td>
+            </tr>
+            <tr>
+              <td class="sb-cell--start"><a href="#">stripe-dunning-sweep</a></td>
+              <td class="sb-cell--end"><span class="sb-badge sb-badge--error">Failing</span></td>
+              <td class="sb-cell--mono" data-label="Endpoint">POST api.acme.dev/billing/dunning</td>
+              <td class="sb-cell--start sb-cell--mono">*/15 * * * *</td>
+              <td class="sb-cell--end"><a href="#">Edit</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2 class="sb-headline-sm">Navigation</h2>
+  <nav class="sb-navbar">
+    <div class="sb-navbar__brand">OnlineCron</div>
+    <div class="sb-navbar__items">
+      <a class="sb-navbar__item" aria-current="page" href="#">Jobs</a>
+      <a class="sb-navbar__item" href="#">Logs</a>
+      <a class="sb-navbar__item" href="#">Keys</a>
+      <a class="sb-navbar__item" href="#">Billing</a>
+      <a class="sb-navbar__item" href="#">Settings</a>
+    </div>
+    <div class="sb-navbar__end"><span class="sb-label-sm">hc@vst.io</span></div>
+  </nav>
+  <div class="sb-tabs" style="margin-top:var(--space-6)">
+    <button class="sb-tabs__tab" aria-selected="true">Overview</button>
+    <button class="sb-tabs__tab" aria-selected="false">Runs</button>
+    <button class="sb-tabs__tab" aria-selected="false">Settings</button>
+  </div>
+</section>
+
+<section>
+  <h2 class="sb-headline-sm">Feedback</h2>
+  <div class="stack">
+    <div class="sb-toast"><span class="sb-toast__bar"></span><div class="sb-toast__body"><div class="sb-toast__title">Job created</div><div class="sb-toast__text">invoice-sweep runs next at 03:00.</div></div><button class="sb-toast__close" aria-label="Close">&times;</button></div>
+    <div class="sb-toast sb-toast--error"><span class="sb-toast__bar"></span><div class="sb-toast__body"><div class="sb-toast__title">Run failed</div><div class="sb-toast__text">502 from api.acme.dev at 03:00.</div></div><button class="sb-toast__close" aria-label="Close">&times;</button></div>
+    <span class="sb-tooltip" tabindex="0">
+      <span class="sb-body-md" style="border-bottom:1px dotted var(--charcoal-mid)">Hover or focus me</span>
+      <span class="sb-tooltip__bubble" role="tooltip">Last run 12:07 · 1,8 s</span>
+    </span>
+  </div>
+</section>
+
+<section>
+  <h2 class="sb-headline-sm">Dialog</h2>
+  <p class="note sb-body-md">Panel shown in flow. In use it sits inside
+     <code class="sb-mono">.sb-dialog</code>, which supplies the flat 50% charcoal scrim.</p>
+  <div class="sb-dialog__panel" style="position:static;max-height:none">
+    <header class="sb-dialog__header">
+      <h2 class="sb-dialog__title">Delete job</h2>
+      <button class="sb-dialog__close" aria-label="Close">&times;</button>
+    </header>
+    <div class="sb-dialog__body">
+      Deleting <strong>stripe-dunning-sweep</strong> removes its schedule and its run history.
+    </div>
+    <footer class="sb-dialog__footer">
+      <button class="sb-btn sb-btn--secondary">Cancel</button>
+      <button class="sb-btn sb-btn--danger">Delete</button>
+    </footer>
+  </div>
+</section>
+
+</div>
+</body>
+</html>

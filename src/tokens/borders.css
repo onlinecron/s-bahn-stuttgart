@@ -1,0 +1,12 @@
+:root{
+--radius:0px;
+--border-width-hairline:1px;--border-width-structural:1px;--border-width-heavy:2px;
+--border-solid:1px solid var(--border-structural);
+--border-hair:1px solid var(--border-hairline);
+--border-heavy:2px solid var(--border-structural);
+--focus-outline:2px solid var(--focus-ring);
+--elevation-none:none;
+--duration-instant:0ms;/* @kind other */
+--duration-fast:80ms;/* @kind other */
+--easing-mechanical:linear;/* @kind other */
+}

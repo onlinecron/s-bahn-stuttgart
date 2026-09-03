@@ -1,0 +1,84 @@
+/* Containers — Card, Dialog */
+
+/* Card: 1px charcoal border, white body, grey header band. The card is a
+   container so its own contents can respond to the card's width rather than
+   the viewport's — a card in a narrow sidebar behaves like a card on a phone. */
+.sb-card{
+  container:sb-card / inline-size;
+  border:var(--border-width-structural) solid var(--border-structural);border-radius:var(--radius);
+  background:var(--surface-card);box-shadow:var(--elevation-none);
+}
+.sb-card__header{
+  display:flex;align-items:center;justify-content:space-between;gap:var(--space-4);
+  padding:var(--space-2) var(--space-3);
+  background:var(--surface-header);border-bottom:var(--border-solid);
+}
+.sb-card__heading{display:flex;align-items:baseline;gap:var(--space-3);min-width:0}
+.sb-card__title{
+  font:var(--type-label-bold-weight) var(--type-label-bold-size)/var(--type-label-bold-line) var(--font-core);
+  letter-spacing:var(--type-label-bold-tracking);text-transform:uppercase;
+  color:var(--text-strong);margin:0;
+}
+.sb-card__meta{
+  font:var(--type-mono-data-weight) var(--type-mono-data-size)/var(--type-mono-data-line) var(--font-mono);
+  font-variant-numeric:tabular-nums;color:var(--text-muted);
+}
+.sb-card__actions{display:flex;gap:var(--space-2);flex:none}
+.sb-card__body{padding:var(--pad-section)}
+/* Tables run full-bleed inside cards so cell rules meet the card border. */
+.sb-card__body--flush{padding:0}
+
+/* Narrow card: the header's two halves stop competing for one line. */
+@container sb-card (max-width: 380px){
+  .sb-card__header{flex-direction:column;align-items:stretch;gap:var(--space-2)}
+  .sb-card__actions{justify-content:flex-start}
+}
+
+/* Dialog. Separated by a flat scrim and a heavier border — never a shadow. */
+.sb-dialog{
+  position:fixed;inset:0;z-index:100;
+  display:flex;align-items:center;justify-content:center;
+  background:rgba(27,28,28,.5);padding:var(--space-4);
+}
+.sb-dialog[hidden]{display:none}
+.sb-dialog__panel{
+  container:sb-dialog / inline-size;
+  width:480px;max-width:100%;max-height:100%;overflow:auto;
+  background:var(--surface-card);
+  border:var(--border-width-heavy) solid var(--border-structural);border-radius:var(--radius);
+}
+.sb-dialog__panel--wide{width:720px}
+.sb-dialog__header{
+  display:flex;align-items:center;justify-content:space-between;gap:var(--space-3);
+  padding:var(--space-2) var(--space-3);
+  background:var(--surface-header);border-bottom:var(--border-solid);
+}
+.sb-dialog__title{
+  font:var(--type-label-bold-weight) var(--type-label-bold-size)/var(--type-label-bold-line) var(--font-core);
+  letter-spacing:var(--type-label-bold-tracking);text-transform:uppercase;
+  color:var(--text-strong);margin:0;
+}
+.sb-dialog__close{
+  width:20px;height:20px;flex:none;padding:0;line-height:1;cursor:pointer;
+  font:700 12px var(--font-core);
+  border:var(--border-width-structural) solid var(--border-structural);
+  background:var(--surface-card);color:var(--text-primary);
+}
+.sb-dialog__body{
+  padding:var(--space-4);
+  font:var(--type-body-md-weight) var(--type-body-md-size)/var(--type-body-md-line) var(--font-core);
+}
+.sb-dialog__footer{
+  display:flex;justify-content:flex-end;gap:var(--space-2);
+  padding:var(--space-3);
+  background:var(--surface-inset);border-top:var(--border-solid);
+}
+
+/* On a phone the dialog fills the screen rather than floating in a scrim. */
+@media (max-width: 480px){
+  .sb-dialog{padding:0;align-items:stretch}
+  .sb-dialog__panel,.sb-dialog__panel--wide{width:100%;max-height:none;border-width:0}
+  .sb-dialog__footer{flex-direction:column-reverse}
+  .sb-dialog__footer > *{width:100%}
+}
+@media (pointer:coarse){.sb-dialog__close{min-width:44px;min-height:44px}}

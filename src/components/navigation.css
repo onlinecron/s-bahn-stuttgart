@@ -1,0 +1,61 @@
+/* Navigation — NavBar, Tabs */
+
+/* NavBar. Pinned to the top; the only sticky element in the system. */
+.sb-navbar{
+  display:flex;align-items:stretch;
+  background:var(--surface-card);border-bottom:var(--border-heavy);
+}
+.sb-navbar--sticky{position:sticky;top:0;z-index:80}
+.sb-navbar__brand{
+  display:flex;align-items:center;padding:0 var(--space-4);flex:none;
+  background:var(--blue-action);color:#fff;border-right:var(--border-solid);
+  font:var(--type-label-bold-weight) var(--type-label-bold-size)/var(--type-label-bold-line) var(--font-core);
+  letter-spacing:.08em;text-transform:uppercase;white-space:nowrap;
+}
+.sb-navbar__items{display:flex;align-items:stretch;min-width:0}
+.sb-navbar__item{
+  padding:var(--space-3) var(--space-4);cursor:pointer;white-space:nowrap;
+  border:none;border-right:var(--border-hair);
+  border-bottom:var(--border-width-heavy) solid transparent;margin-bottom:-2px;
+  background:transparent;color:var(--text-primary);text-decoration:none;
+  font:var(--type-label-bold-weight) var(--type-label-bold-size)/var(--type-label-bold-line) var(--font-core);
+  letter-spacing:var(--type-label-bold-tracking);text-transform:uppercase;
+  display:inline-flex;align-items:center;
+}
+.sb-navbar__item:hover{background:var(--surface-inset)}
+.sb-navbar__item[aria-current],.sb-navbar__item--active{
+  background:var(--surface-inset);color:var(--text-link);
+  border-bottom-color:var(--blue-signal);
+}
+.sb-navbar__end{display:flex;align-items:center;gap:var(--space-3);padding:0 var(--space-4);margin-left:auto;flex:none}
+
+/* Narrow: the item strip scrolls sideways rather than wrapping or collapsing,
+   so every destination stays one swipe away. */
+@media (max-width: 768px){
+  .sb-navbar{flex-wrap:wrap}
+  .sb-navbar__items{
+    order:3;width:100%;overflow-x:auto;
+    scrollbar-width:none;-webkit-overflow-scrolling:touch;
+  }
+  .sb-navbar__items::-webkit-scrollbar{display:none}
+  .sb-navbar__end{margin-left:auto}
+}
+
+/* Tabs. Active tab is joined to the panel below it by a 2px signal-blue edge. */
+.sb-tabs{display:flex;gap:0;border-bottom:var(--border-solid);overflow-x:auto}
+.sb-tabs__tab{
+  padding:var(--space-2) var(--space-4);cursor:pointer;white-space:nowrap;
+  border:var(--border-width-structural) solid var(--border-structural);
+  margin-bottom:-1px;margin-right:-1px;
+  background:var(--surface-header);color:var(--text-muted);
+  font:var(--type-label-bold-weight) var(--type-label-bold-size)/var(--type-label-bold-line) var(--font-core);
+  letter-spacing:var(--type-label-bold-tracking);text-transform:uppercase;
+}
+.sb-tabs__tab[aria-selected=true]{
+  background:var(--surface-card);color:var(--text-link);
+  border-bottom:var(--border-width-heavy) solid var(--blue-signal);
+}
+
+@media (pointer:coarse){
+  .sb-navbar__item,.sb-tabs__tab{min-height:44px}
+}

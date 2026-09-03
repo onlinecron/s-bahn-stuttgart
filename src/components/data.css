@@ -144,3 +144,10 @@
   font:var(--type-label-bold-weight) var(--type-label-bold-size)/var(--type-label-bold-line) var(--font-core);
   letter-spacing:var(--type-label-bold-tracking);text-transform:uppercase;color:var(--text-primary);
 }
+
+/* Touch targets. A selectable tag is a control like a small button, so it
+   gets the same 44px minimum under a coarse pointer; a plain tag is a label
+   and stays as it is. */
+@media (pointer:coarse){
+  .sb-tag--selectable{min-height:44px}
+}

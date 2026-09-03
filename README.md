@@ -110,6 +110,11 @@ Components use **container queries**, not viewport media queries. A card inside 
 behaves like a card on a phone, and a component in a narrow modal on a wide desktop adapts
 correctly. Page-level layout is the consumer's business and can use ordinary media queries.
 
+The only size-based media queries in the library are on `.sb-dialog` and `.sb-toast-stack`, which
+are `position: fixed` and therefore genuinely viewport-relative. Everything that sits in normal
+flow uses `@container`. A navbar in a 375px panel on a 1400px screen collapses; a media query
+would have left it overlapping itself.
+
 Touch-target minimums are keyed on `@media (pointer: coarse)` rather than viewport width: a tablet
 in landscape needs the larger target, a narrow desktop window does not.
 

@@ -1,8 +1,13 @@
 /* Navigation — NavBar, Tabs */
 
-/* NavBar. Pinned to the top; the only sticky element in the system. */
+/* NavBar. Pinned to the top; the only sticky element in the system.
+   It is its own container, so the narrow layout keys on the navbar's width
+   rather than the viewport's — a navbar in a narrow panel on a wide screen
+   must collapse just like one on a phone. flex-wrap is always on so the
+   container query only has to hand .sb-navbar__items a full row. */
 .sb-navbar{
-  display:flex;align-items:stretch;
+  container:sb-navbar / inline-size;
+  display:flex;align-items:stretch;flex-wrap:wrap;
   background:var(--surface-card);border-bottom:var(--border-heavy);
 }
 .sb-navbar--sticky{position:sticky;top:0;z-index:80}
@@ -12,9 +17,16 @@
   font:var(--type-label-bold-weight) var(--type-label-bold-size)/var(--type-label-bold-line) var(--font-core);
   letter-spacing:.08em;text-transform:uppercase;white-space:nowrap;
 }
-.sb-navbar__items{display:flex;align-items:stretch;min-width:0}
+/* min-width:0 lets the strip shrink below its content, and overflow-x makes
+   the overflow scroll instead of colliding with whatever follows it. Without
+   both, items overlap .sb-navbar__end at narrow widths. */
+.sb-navbar__items{
+  display:flex;align-items:stretch;min-width:0;
+  overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;
+}
+.sb-navbar__items::-webkit-scrollbar{display:none}
 .sb-navbar__item{
-  padding:var(--space-3) var(--space-4);cursor:pointer;white-space:nowrap;
+  padding:var(--space-3) var(--space-4);cursor:pointer;white-space:nowrap;flex:none;
   border:none;border-right:var(--border-hair);
   border-bottom:var(--border-width-heavy) solid transparent;margin-bottom:-2px;
   background:transparent;color:var(--text-primary);text-decoration:none;
@@ -27,24 +39,23 @@
   background:var(--surface-inset);color:var(--text-link);
   border-bottom-color:var(--blue-signal);
 }
-.sb-navbar__end{display:flex;align-items:center;gap:var(--space-3);padding:0 var(--space-4);margin-left:auto;flex:none}
+.sb-navbar__end{
+  display:flex;align-items:center;gap:var(--space-3);
+  padding:0 var(--space-4);margin-left:auto;flex:none;
+}
 
-/* Narrow: the item strip scrolls sideways rather than wrapping or collapsing,
-   so every destination stays one swipe away. */
-@media (max-width: 768px){
-  .sb-navbar{flex-wrap:wrap}
-  .sb-navbar__items{
-    order:3;width:100%;overflow-x:auto;
-    scrollbar-width:none;-webkit-overflow-scrolling:touch;
-  }
-  .sb-navbar__items::-webkit-scrollbar{display:none}
-  .sb-navbar__end{margin-left:auto}
+/* Narrow navbar: the item strip drops to its own full-width row and scrolls
+   sideways, so every destination stays one swipe away rather than hidden. */
+@container sb-navbar (max-width: 768px){
+  .sb-navbar__items{order:3;width:100%;border-top:var(--border-hair)}
+  .sb-navbar__brand{padding:var(--space-2) var(--space-4)}
+  .sb-navbar__end{padding:var(--space-2) var(--space-4)}
 }
 
 /* Tabs. Active tab is joined to the panel below it by a 2px signal-blue edge. */
 .sb-tabs{display:flex;gap:0;border-bottom:var(--border-solid);overflow-x:auto}
 .sb-tabs__tab{
-  padding:var(--space-2) var(--space-4);cursor:pointer;white-space:nowrap;
+  padding:var(--space-2) var(--space-4);cursor:pointer;white-space:nowrap;flex:none;
   border:var(--border-width-structural) solid var(--border-structural);
   margin-bottom:-1px;margin-right:-1px;
   background:var(--surface-header);color:var(--text-muted);

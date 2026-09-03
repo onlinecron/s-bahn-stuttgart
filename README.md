@@ -3,12 +3,19 @@
 A small, flat, utilitarian design system in plain CSS. Named in honour of a nice looking train —
 that is where the colours come from.
 
+<a href="https://www.bw24.de/"><img src="https://www.bw24.de/bilder/2020/07/31/90016445/21863998-rendering-bahn-stuttgart-design-2Uj8lxBMOoef.jpg" width="520"
+  alt="An S-Bahn Stuttgart ET 430 railcar: grey body, signal-blue doors, signal-yellow first-class markings."></a>
+
+<sub>Photo via <a href="https://www.bw24.de/">bw24.de</a>, used for illustration only. Not covered by this
+repository's MIT licence.</sub>
+
 No shadows. No rounded corners. No gradients. No animation to speak of. Structure comes from 1px
 charcoal rules; meaning comes from two signal colours.
 
 - **No build step.** One stylesheet, no dependencies, no framework, no preprocessor.
 - **Container-query aware.** Components adapt to the width of their own box, not the viewport.
 - **~30 KB** unminified, and readable.
+- **[Live specimen page](https://raw.githack.com/onlinecron/s-bahn-stuttgart/refs/heads/main/demo/index.html)** — every component, at desktop and phone width.
 
 ## Install
 
@@ -28,7 +35,7 @@ To rebuild `dist/s-bahn.css` after editing anything in `src/`:
 ./build.sh
 ```
 
-`demo/index.html` is the specimen page — open it in a browser to see everything at once.
+`demo/index.html` is the specimen page — open it locally, or view the [live copy](https://raw.githack.com/onlinecron/s-bahn-stuttgart/refs/heads/main/demo/index.html).
 
 ## Principles
 
